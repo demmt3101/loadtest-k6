@@ -1,0 +1,12 @@
+{
+  "name": "loadtest-k6",
+  "version": "1.0.0",
+  "description": "Pruebas de carga con k6 - Ejercicio QA",
+  "scripts": {
+    "test": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"New-Item -ItemType Directory -Force results | Out-Null; & 'C:\\Program Files\\k6\\k6.exe' run script.js\"",
+    "test:summary": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"New-Item -ItemType Directory -Force results | Out-Null; & 'C:\\Program Files\\k6\\k6.exe' run script.js | Tee-Object -FilePath results\\textSummary.txt\"",
+    "test:json": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"New-Item -ItemType Directory -Force results | Out-Null; & 'C:\\Program Files\\k6\\k6.exe' run script.js --out json=results\\resultados.json\"",
+    "test:html": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"New-Item -ItemType Directory -Force results | Out-Null; & 'C:\\Program Files\\k6\\k6.exe' run script.js --out web-dashboard=export=results\\report.html\"",
+    "test:all": "npm run test && npm run test:summary && npm run test:json && npm run test:html"
+  }
+}
