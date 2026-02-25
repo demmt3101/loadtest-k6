@@ -17,6 +17,7 @@ results/ (se crea automáticamente)
 textSummary.txt → Resumen de métricas
 resultados.json → Métricas completas
 report.html → Dashboard visual
+ruta de Dashboard visual -> https://demmt3101.github.io/loadtest-k6/results/report.html
 
 ---
 
