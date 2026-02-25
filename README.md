@@ -6,19 +6,16 @@ Este proyecto implementa una prueba de carga para el servicio de login utilizand
 
 # 📁 Estructura del Proyecto
 
-LOADTEST-K6/
+- `script.js`: Script principal de prueba de carga  
+- `users.csv`: Datos de usuarios para login  
+- `package.json`: Scripts de ejecución (npm)  
+- `results/` (se crea automáticamente)
+  - `textSummary.txt`: Resumen de métricas  
+  - `resultados.json`: Métricas completas  
+  - `report.html`: Dashboard visual  
 
-script.js → Script principal de prueba de carga
-users.csv → Datos de usuarios para login
-package.json → Scripts de ejecución npm
-
-results/ (se crea automáticamente)
-
-textSummary.txt → Resumen de métricas
-resultados.json → Métricas completas
-report.html → Dashboard visual
-ruta de Dashboard visual -> https://demmt3101.github.io/loadtest-k6/results/report.html
-
+# 📊 Dashboard (Reporte)
+Ruta: https://demmt3101.github.io/loadtest-k6/results/report.html
 ---
 
 # ⚙️ Tecnologías Utilizadas
