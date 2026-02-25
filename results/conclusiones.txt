@@ -1,0 +1,21 @@
+CONCLUSIONES – Reto técnico de performance (k6)
+
+1) Cumplimiento de criterios
+- Throughput objetivo: 20 TPS (constant-arrival-rate). La tasa real se mantuvo ~19.75 req/s, muy cercana al objetivo.
+- Latencia: p95 de http_req_duration = 757.59 ms (< 1500 ms). Se cumple el SLA.
+- Errores: http_req_failed = 0.00% (< 3%). Se cumple.
+- Validación funcional: checks (status 2xx y token exists) = 100%; token_missing = 0.00%.
+
+2) Interpretación de la gráfica (VUs vs RPS)
+- En un escenario constant-arrival-rate, k6 ajusta VUs para sostener la tasa. Por eso, los VUs no son el objetivo; son el mecanismo de control.
+- La caída puntual observada al inicio en http_reqs/s no se explica por fallas de solicitudes ni por bloqueo, porque no se observan códigos 4xx/5xx en los resultados muestreados: se registran respuestas 2xx (status 201) y http_req_failed permanece en 0.
+- La explicación más probable es una degradación transitoria de desempeño: picos de latencia y/o una limitación momentánea para iniciar todas las iteraciones a la tasa objetivo, lo cual se refleja en dropped_iterations.
+
+3) Observaciones y riesgos
+- Se observaron picos aislados de latencia (http_req_duration max ~3.95 s / iteration_duration max ~4.15 s). Aunque el p95 está dentro del umbral, estos picos pueden afectar experiencia o estabilidad bajo mayor carga.
+- dropped_iterations = 12 indica presión puntual para sostener 20 TPS; con cargas mayores podría incrementarse.
+
+4) Recomendaciones
+- Aumentar el margen de maxVUs para reducir/evitar dropped_iterations.
+- Correlacionar picos de latencia con logs/APM (backend, DB, red, TLS/DNS, rate limits).
+- Ejecutar prueba escalonada (20→40→60 TPS) para identificar el punto de saturación y establecer capacidad.
